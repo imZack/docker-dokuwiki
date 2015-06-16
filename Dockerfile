@@ -20,7 +20,12 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm /etc/nginx/sites-enabled/*
 ADD dokuwiki.conf /etc/nginx/sites-enabled/
 RUN mkdir -p /dokuwiki \
-    && ln -s /dokuwiki/data /var/www/data \
+    && ln -s /dokuwiki/data/pages /var/www/data/pages \
+    && ln -s /dokuwiki/data/meta /var/www/data/meta \
+    && ln -s /dokuwiki/data/media /var/www/data/media \
+    && ln -s /dokuwiki/data/media_attic /var/www/data/media_attic \
+    && ln -s /dokuwiki/data/media_meta /var/www/data/media_meta \
+    && ln -s /dokuwiki/data/attic /var/www/data/attic \
     && rm -rf /var/www/conf && ln -s /dokuwiki/conf /var/www/conf \
     && chown -R www-data:www-data /var/www
 
