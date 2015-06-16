@@ -1,8 +1,8 @@
 FROM ubuntu:14.04
-MAINTAINER Ilya Stepanov <dev@ilyastepanov.com>
+MAINTAINER YuLun Shih <shih@yulun.me>
 
 RUN apt-get update && \
-    apt-get install -y nginx php5-fpm php5-gd curl && \
+    apt-get install -y nginx php5-fpm php5-gd php5-ldap curl && \
     rm -rf /var/lib/apt/lists/*
 
 ENV DOKUWIKI_VERSION 2014-09-29d
