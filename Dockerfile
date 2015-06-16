@@ -21,7 +21,7 @@ RUN rm /etc/nginx/sites-enabled/*
 ADD dokuwiki.conf /etc/nginx/sites-enabled/
 RUN mkdir -p /dokuwiki \
     && rm -rf /var/www/data/pages /var/www/data/meta /var/www/data/media \
-       /var/www/data/media_attic /var/www/data/media_meta /var/www/data/attic
+       /var/www/data/media_attic /var/www/data/media_meta /var/www/data/attic \
     && ln -s /dokuwiki/data/pages /var/www/data/pages \
     && ln -s /dokuwiki/data/meta /var/www/data/meta \
     && ln -s /dokuwiki/data/media /var/www/data/media \
