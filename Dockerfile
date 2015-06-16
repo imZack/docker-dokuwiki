@@ -19,13 +19,8 @@ RUN echo "cgi.fix_pathinfo = 0;" >> /etc/php5/fpm/php.ini
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm /etc/nginx/sites-enabled/*
 ADD dokuwiki.conf /etc/nginx/sites-enabled/
-RUN mkdir -p /dokuwiki/data \
-    && mkdir -p /var/www/data/pages && ln -s /dokuwiki/data/pages /var/www/data/pages \
-    && mkdir -p /var/www/data/meta && ln -s /dokuwiki/data/meta /var/www/data/meta \
-    && mkdir -p /var/www/data/media && ln -s /dokuwiki/data/media /var/www/data/media \
-    && mkdir -p /var/www/data/media_attic && ln -s /dokuwiki/data/media_attic /var/www/data/media_attic \
-    && mkdir -p /var/www/data/media_meta && ln -s /dokuwiki/data/media_meta /var/www/data/media_meta \
-    && mkdir -p /var/www/data/attic && ln -s /dokuwiki/data/attic /var/www/data/attic \
+RUN mkdir -p /dokuwiki \
+    && ln -s /dokuwiki/data /var/www/data \
     && rm -rf /var/www/conf && ln -s /dokuwiki/conf /var/www/conf \
     && chown -R www-data:www-data /var/www
 
