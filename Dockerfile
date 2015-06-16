@@ -21,17 +21,18 @@ RUN echo "cgi.fix_pathinfo = 0;" >> /etc/php5/fpm/php.ini
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm /etc/nginx/sites-enabled/*
 ADD dokuwiki.conf /etc/nginx/sites-enabled/
+RUN mkdir /dokuwiki \
+    && ln -s /var/www/data/pages /dokuwiki/data/pages \
+    && ln -s /var/www/data/meta /dokuwiki/data/meta \
+    && ln -s /var/www/data/media /dokuwiki/data/media \
+    && ln -s /var/www/data/media_attic /dokuwiki/data/media_attic \
+    && ln -s /var/www/data/media_meta /dokuwiki/data/media_meta \
+    && ln -s /var/www/data/attic /dokuwiki/data/attic \
+    && ln -s /var/www/conf /dokuwiki/conf \
+    && ln -s /var/log /dokuwiki/log
+
 
 EXPOSE 80
-VOLUME [ \
-    "/var/www/data/pages", \
-    "/var/www/data/meta", \
-    "/var/www/data/media", \
-    "/var/www/data/media_attic", \
-    "/var/www/data/media_meta", \
-    "/var/www/data/attic", \
-    "/var/www/conf", \
-    "/var/log" \
-]
+VOLUME /dokuwiki
 
 CMD /usr/sbin/php5-fpm && /usr/sbin/nginx
