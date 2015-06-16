@@ -26,7 +26,7 @@ RUN mkdir -p /dokuwiki/data \
     && mkdir -p /var/www/data/media_attic && ln -s /dokuwiki/data/media_attic /var/www/data/media_attic \
     && mkdir -p /var/www/data/media_meta && ln -s /dokuwiki/data/media_meta /var/www/data/media_meta \
     && mkdir -p /var/www/data/attic && ln -s /dokuwiki/data/attic /var/www/data/attic \
-    && rm -rf /var/www/conf && ln -s /dokuwiki/conf /var/www/conf
+    && rm -rf /var/www/conf && ln -s /dokuwiki/conf /var/www/conf \
     && chown -R www-data:www-data /var/www
 
 EXPOSE 80
