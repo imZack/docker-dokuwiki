@@ -22,17 +22,16 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm /etc/nginx/sites-enabled/*
 ADD dokuwiki.conf /etc/nginx/sites-enabled/
 RUN mkdir -p /dokuwiki/data \
-    && mkdir -p /var/www/data/pages && ln -s /var/www/data/pages /dokuwiki/data/pages \
-    && mkdir -p /var/www/data/meta && ln -s /var/www/data/meta /dokuwiki/data/meta \
-    && mkdir -p /var/www/data/media && ln -s /var/www/data/media /dokuwiki/data/media \
-    && mkdir -p /var/www/data/media_attic && ln -s /var/www/data/media_attic /dokuwiki/data/media_attic \
-    && mkdir -p /var/www/data/media_meta && ln -s /var/www/data/media_meta /dokuwiki/data/media_meta \
-    && mkdir -p /var/www/data/attic && ln -s /var/www/data/attic /dokuwiki/data/attic \
-    && ln -s /var/www/conf /dokuwiki/conf \
-    && ln -s /var/log /dokuwiki/log
+    && mkdir -p /var/www/data/pages && ln -s /dokuwiki/data/pages /var/www/data/pages \
+    && mkdir -p /var/www/data/meta && ln -s /dokuwiki/data/meta /var/www/data/meta \
+    && mkdir -p /var/www/data/media && ln -s /dokuwiki/data/media /var/www/data/media \
+    && mkdir -p /var/www/data/media_attic && ln -s /dokuwiki/data/media_attic /var/www/data/media_attic \
+    && mkdir -p /var/www/data/media_meta && ln -s /dokuwiki/data/media_meta /var/www/data/media_meta \
+    && mkdir -p /var/www/data/attic && ln -s /dokuwiki/data/attic /var/www/data/attic \
+    && rm -rf /var/www/conf && ln -s /dokuwiki/conf /var/www/conf
 
 
 EXPOSE 80
-VOLUME /dokuwiki
+VOLUME ["/dokuwiki", "/var/log/lighttpd"]
 
 CMD /usr/sbin/php5-fpm && /usr/sbin/nginx
