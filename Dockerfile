@@ -15,8 +15,6 @@ RUN mkdir -p /var/www \
     && tar xzf "dokuwiki-$DOKUWIKI_VERSION.tgz" --strip 1 \
     && rm "dokuwiki-$DOKUWIKI_VERSION.tgz"
 
-RUN chown -R www-data:www-data /var/www
-
 RUN echo "cgi.fix_pathinfo = 0;" >> /etc/php5/fpm/php.ini
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 RUN rm /etc/nginx/sites-enabled/*
@@ -29,7 +27,7 @@ RUN mkdir -p /dokuwiki/data \
     && mkdir -p /var/www/data/media_meta && ln -s /dokuwiki/data/media_meta /var/www/data/media_meta \
     && mkdir -p /var/www/data/attic && ln -s /dokuwiki/data/attic /var/www/data/attic \
     && rm -rf /var/www/conf && ln -s /dokuwiki/conf /var/www/conf
-
+    && chown -R www-data:www-data /var/www
 
 EXPOSE 80
 VOLUME ["/dokuwiki", "/var/log/lighttpd"]
